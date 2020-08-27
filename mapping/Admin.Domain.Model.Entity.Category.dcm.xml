@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+        xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+    <entity name="Admin\Domain\Model\Entity\Category" table="categories">
+        <id name="id" column="id" type="Admin\Domain\Model\Value\CategoryId" length="36">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="name" column="name" type="string" length="255" nullable="false"/>
+        <field name="description" column="description" type="text" length="65535" nullable="false"/>
+    </entity>
+</doctrine-mapping>
