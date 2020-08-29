@@ -5,12 +5,8 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
 $routes = new RouteCollection();
-$routes->add('list_categories', new Route(
-        '/list_categories',
-        [
-            '_controller' => ListCategoriesController::class,
-        ]
-    )
-);
+$routes->add('list_categories', new Route('/list_categories', [
+    '_controller' => "list_categories",
+]));
 
 return $routes;

@@ -4,11 +4,13 @@ use Infrastructure\Admin\UI\Web\Controller\ListCategoriesController;
 use Infrastructure\Common\Framework;
 use Symfony\Component\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+use Symfony\Component\HttpKernel\Controller\ContainerControllerResolver;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
 use Symfony\Component\HttpKernel\EventListener\ResponseListener;
 use Symfony\Component\HttpKernel\EventListener\RouterListener;
@@ -22,7 +24,9 @@ $containerBuilder->register('matcher', UrlMatcher::class)
     ->setArguments(['%routes%', new Reference('context')]);
 $containerBuilder->register('request_stack', RequestStack::class);
 
-$containerBuilder->register('controller_resolver', ControllerResolver::class);
+$containerBuilder->register('controller_resolver', ContainerControllerResolver::class)
+    ->setArguments([new Reference('service_container')]);
+
 $containerBuilder->register('argument_resolver', ArgumentResolver::class);
 
 $containerBuilder->register('listener.router', RouterListener::class)
